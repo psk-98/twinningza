@@ -18,9 +18,8 @@ export default function Home() {
   useEffect(() => {
     dispatch(getProducts())
   }, [])
-  return loading ? (
-    <Loader />
-  ) : (
+
+  return (
     <motion.div
       key={loading}
       variants={containerVariants}
