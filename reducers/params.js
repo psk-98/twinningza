@@ -4,7 +4,7 @@ export const paramsSlice = createSlice({
   name: "params",
   initialState: {
     sort: "-date_added",
-    pageSize: 4,
+    pageSize: 12,
     sizes: [3, 8],
     slug: "all",
   },

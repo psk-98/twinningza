@@ -1,9 +1,10 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import styles from '../../styles/Home.module.css'
-import { motion } from 'framer-motion'
-import { sliderCardVariants } from '../../animations/common'
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import styles from "../../styles/Home.module.css"
+import { motion } from "framer-motion"
+import { sliderCardVariants } from "../../animations/common"
+import { backArrow, forwardArrow } from "../../public/svgs"
 
 export default function Slider({ header, products }) {
   const [isEmpty, setEmpty] = useState(true)
@@ -17,7 +18,13 @@ export default function Slider({ header, products }) {
     <></>
   ) : (
     <div className={styles.productSlider}>
-      <div className={`${styles.sliderHeader} header`}>{header}</div>
+      <div className={`${styles.sliderHeader} `}>
+        <p className="header">{header}</p>
+        <div className={styles.sliderControls}>
+          {backArrow}
+          {forwardArrow}
+        </div>
+      </div>
       <div className={styles.slider}>
         {products?.map((product) => {
           return (

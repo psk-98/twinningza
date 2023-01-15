@@ -11,7 +11,7 @@ export default function OtherLinks() {
   const [kidsHover, setKidsHover] = useState(false)
 
   return (
-    <>
+    <div className={styles.linksWrapper}>
       <Link href="products/women">
         <div
           className={`${styles.linkWrapper} btn`}
@@ -79,6 +79,6 @@ export default function OtherLinks() {
           </motion.div>
         </div>
       </Link>
-    </>
+    </div>
   )
 }

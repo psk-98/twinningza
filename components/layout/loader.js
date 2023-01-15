@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { loaderVariants } from '../../animations/loader'
+import { motion } from "framer-motion"
+import { loaderVariants } from "../../animations/loader"
 
 const Loader = ({ loading, children }) => {
   return (
@@ -8,7 +8,7 @@ const Loader = ({ loading, children }) => {
         className="loader"
         variants={loaderVariants}
         animate="loading"
-        exit={{ x: -100 }}
+        exit={{ x: "-100vw" }}
       >
         TwinningZA
       </motion.div>

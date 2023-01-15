@@ -1,8 +1,6 @@
-import Nav from '../nav/Nav'
-import Footer from './Footer'
-// import Footer from "./Footer"
-import { AnimatePresence, motion } from 'framer-motion'
-import { containerVariants } from '../../animations/routes'
+import Nav from "../nav/Nav"
+import Footer from "./Footer"
+
 const Layout = ({ children }) => {
   return (
     <>

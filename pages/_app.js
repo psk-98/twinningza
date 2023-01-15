@@ -1,14 +1,23 @@
-import { WrappedBuildError } from 'next/dist/server/base-server'
-import Layout from '../components/layout/Layout'
-import '../styles/globals.css'
-import { wrapper } from '../store/store'
-import { AnimatePresence } from 'framer-motion'
+import Layout from "../components/layout/Layout"
+import "../styles/globals.css"
+import { wrapper } from "../store/store"
+import { AnimatePresence, motion } from "framer-motion"
+import { containerVariants } from "../animations/routes"
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   return (
     <Layout>
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          className="container"
+          key={router.route}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          <Component {...pageProps} />
+        </motion.div>
       </AnimatePresence>
     </Layout>
   )

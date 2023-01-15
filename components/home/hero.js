@@ -1,24 +1,26 @@
-import Link from 'next/link'
-import styles from '../../styles/Home.module.css'
-import { motion } from 'framer-motion'
-import { btnVariants } from '../../animations/home'
+import Link from "next/link"
+import styles from "../../styles/Home.module.css"
+import { motion } from "framer-motion"
+import { btnVariants } from "../../animations/home"
+import { useRouter } from "next/router"
 
 export default function Hero() {
+  const router = useRouter()
+
   return (
     <>
       <div
         className={styles.landing}
         style={{ backgroundImage: `url(hero.webp)` }}
       >
-        <Link href="/products/all">
-          <motion.div
-            className={`${styles.shopBtn} btn`}
-            variants={btnVariants}
-            whileHover="hover"
-          >
-            Shop now
-          </motion.div>
-        </Link>
+        <motion.div
+          className={`${styles.shopBtn} btn`}
+          variants={btnVariants}
+          whileHover="hover"
+          onClick={() => router.push("/products/all")}
+        >
+          Shop now
+        </motion.div>
       </div>
       <div className={`${styles.about} contained`}>
         <p>

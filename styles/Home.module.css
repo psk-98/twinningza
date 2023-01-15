@@ -11,7 +11,7 @@
   padding: 7px 20px;
   text-align: center;
   cursor: pointer;
-  margin: 0 0 50% 0;
+  margin: 0 0 20% 0;
   color: #fff;
   background: #000;
 }
@@ -24,6 +24,8 @@
 }
 .sliderHeader {
   margin: 0 25px 30px 25px;
+  display: flex;
+  justify-content: space-between;
 }
 .slider {
   display: flex;
@@ -50,8 +52,14 @@
   text-align: center;
 }
 .sliderImg,
-.sliderImg img {
+.sliderImg img,
+.imgWrapper,
+.imgWrapper img {
   width: 100%;
+}
+
+.linksWrapper {
+  display: flex;
 }
 .linkWrapper {
   display: flex;
@@ -59,13 +67,11 @@
   align-items: center;
   transition: all ease-in 0.3s;
 }
-.imgWrapper img {
-  width: 100%;
-  height: 100%;
+.sliderControls {
+  display: flex;
 }
-.imgWrapper {
-  padding: 0;
-  height: fit-content;
+.sliderControls:first-child {
+  margin: 0 20px 0 0;
 }
 .linkBtn {
   position: absolute;
@@ -75,4 +81,30 @@
   z-index: auto;
   pointer-events: none;
   transition: all ease-in 0.6s;
+}
+@media (pointer: coarse) {
+  .sliderControls {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .sliderCard {
+    min-width: 40%;
+    margin: 0 0 0 40px;
+  }
+  .sliderHeader {
+    margin: 0 40px 30px 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .sliderHeader {
+    margin: 0 70px 30px 70px;
+  }
+  .slider {
+    padding: 0 0 0 70px;
+  }
+  .sliderCard {
+    min-width: 25%;
+    margin: 0 20px 0 0;
+  }
 }
