@@ -1,27 +1,27 @@
-import navStyles from '../../styles/Nav.module.css'
-import { motion, useAnimation, useScroll } from 'framer-motion'
+import navStyles from "../../styles/Nav.module.css"
+import { motion, useAnimation, useViewportScroll } from "framer-motion"
 import {
   line1Variants,
   line2Variants,
   line3Variants,
   navVariants,
-} from '../../animations/nav'
-import { useEffect, useState } from 'react'
-import { CartIcon, handleBurger, SearchIcon } from './helpers'
-import Link from 'next/link'
-import Search from './search'
+} from "../../animations/nav"
+import { useEffect, useState } from "react"
+import { CartIcon, handleBurger, SearchIcon } from "./helpers"
+import Link from "next/link"
+import Search from "./search"
 
 export default function Nav() {
   const [toggle, setToggle] = useState(false)
   const [isSearch, setIsSearch] = useState(false)
 
-  const { scrollYProgress } = useScroll()
+  const { scrollYProgress } = useViewportScroll()
 
   const [show, setShow] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
   const controlNavbar = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {
         // if scroll down hide the navbar
         setShow(false)
@@ -38,12 +38,12 @@ export default function Nav() {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', controlNavbar)
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar)
 
       // cleanup function
       return () => {
-        window.removeEventListener('scroll', controlNavbar)
+        window.removeEventListener("scroll", controlNavbar)
       }
     }
   }, [lastScrollY])

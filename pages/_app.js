@@ -1,23 +1,13 @@
 import Layout from "../components/layout/Layout"
 import "../styles/globals.css"
 import { wrapper } from "../store/store"
-import { AnimatePresence, motion } from "framer-motion"
-import { containerVariants } from "../animations/routes"
+import { AnimatePresence } from "framer-motion"
 
 function MyApp({ Component, pageProps, router }) {
   return (
     <Layout>
-      <AnimatePresence mode="wait">
-        <motion.div
-          className="container"
-          key={router.route}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <Component {...pageProps} />
-        </motion.div>
+      <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+        <Component {...pageProps} key={router.route} />
       </AnimatePresence>
     </Layout>
   )

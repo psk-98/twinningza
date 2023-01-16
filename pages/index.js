@@ -6,6 +6,7 @@ import Slider from "../components/common/productsSlider"
 import Hero from "../components/home/hero"
 import OtherLinks from "../components/home/otherLinks"
 import Loader from "../components/layout/loader"
+import PageWrapper from "../components/layout/PageWrapper"
 import { AnimatePresence, motion } from "framer-motion"
 import { containerVariants } from "../animations/routes"
 
@@ -19,22 +20,13 @@ export default function Home() {
     dispatch(getProducts())
   }, [])
 
-  return (
-    <AnimatePresence>
-      {loading ? (
-        <Loader />
-      ) : (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <Hero />
-          <Slider header="Featured" products={products} />
-          <OtherLinks />
-        </motion.div>
-      )}
-    </AnimatePresence>
+  return loading ? (
+    <Loader />
+  ) : (
+    <PageWrapper key={loading}>
+      <Hero />
+      <Slider header="Featured" products={products} />
+      <OtherLinks />
+    </PageWrapper>
   )
 }

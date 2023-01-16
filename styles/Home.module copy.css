@@ -60,7 +60,6 @@
 
 .linksWrapper {
   display: flex;
-  flex-direction: column;
 }
 .linkWrapper {
   display: flex;

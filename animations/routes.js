@@ -1,13 +1,39 @@
 export const containerVariants = {
   hidden: {
-    //opacity: 0,
-    x: "100vw",
+    x: 300,
+    scale: 0,
+  },
+  visible: {
+    scale: 1,
+    x: 0,
+
+    transition: {
+      type: "spring",
+      staggerChildren: 0.3,
+      duration: 0.8,
+      delay: 0.5,
+    },
+  },
+  exit: {
+    x: -300,
+    opacity: 0,
+    transition: {
+      type: "spring",
+      delay: 0.5,
+      duration: 1,
+    },
+  },
+}
+export const containerVariantss = {
+  hidden: {
+    opacity: 0,
+    //x: "100vw",
     //scale: 2,
   },
   visible: {
-    //opacity: 1,
+    opacity: 1,
     //scale: 1,
-    x: "0vw",
+    //x: "0vw",
     transition: {
       type: "spring",
       staggerChildren: 0.3,

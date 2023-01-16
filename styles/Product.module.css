@@ -1,6 +1,9 @@
-.selectorWrapper {
+.selectorWrapperSm {
   display: flex;
   justify-content: center;
+}
+.selectorWrapperLg {
+  display: none;
 }
 .imgSelector {
   width: 10px;
