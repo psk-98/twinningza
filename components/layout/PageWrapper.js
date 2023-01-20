@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { containerVariants } from "../../animations/routes"
 
-const pageWrapper = ({ children }) => {
+const PageWrapper = ({ children }) => {
   return (
     <motion.div
       className="container"
@@ -14,4 +14,4 @@ const pageWrapper = ({ children }) => {
     </motion.div>
   )
 }
-export default pageWrapper
+export default PageWrapper

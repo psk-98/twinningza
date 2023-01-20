@@ -27,7 +27,7 @@ export const productsSlice = createSlice({
       if (state.selectedSizes.includes(action?.payload)) {
         //remove element if already in array
         state.selectedSizes = state.selectedSizes.filter(
-          (element) => element !== action?.payload
+          (element) => element !== action?.payload,
         )
       } else state.selectedSizes.push(action?.payload)
     },
@@ -48,6 +48,7 @@ export const productsSlice = createSlice({
       state.prevPage = action.payload.res.data.previous
       state.nextPage = action.payload.res.data.next
       state.loading = false
+      state.error = false
     })
     builder.addCase(getProducts.rejected, (state, action) => {
       console.log(action)
@@ -57,6 +58,7 @@ export const productsSlice = createSlice({
     // new page
     builder.addCase(getNewPage.pending, (state, action) => {
       state.loading = true
+      state.products = null
     })
     builder.addCase(getNewPage.fulfilled, (state, action) => {
       state.products = action.payload.res.data.results
@@ -64,6 +66,7 @@ export const productsSlice = createSlice({
       state.prevPage = action.payload.res.data.previous
       state.nextPage = action.payload.res.data.next
       state.loading = false
+      state.error = false
     })
     builder.addCase(getNewPage.rejected, (state, action) => {
       state.error = action.payload
@@ -71,10 +74,12 @@ export const productsSlice = createSlice({
     })
     builder.addCase(getProduct.pending, (state) => {
       state.loading = true
+      state.product = null
     })
     builder.addCase(getProduct.fulfilled, (state, action) => {
       state.product = action?.payload.res.data
       state.loading = false
+      state.error = false
     })
     builder.addCase(getProduct.rejected, (state, action) => {
       state.error = action.payload

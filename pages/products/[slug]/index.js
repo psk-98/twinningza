@@ -11,6 +11,7 @@ import ProductCards from "../../../components/products/products"
 import styles from "../../../styles/Products.module.css"
 import Filterbar from "../../../components/products/filterbar"
 import { sortFilter } from "../../../public/svgs"
+import PageWrapper from "../../../components/layout/PageWrapper"
 
 export default function Products() {
   const state = useSelector((state) => state)
@@ -33,33 +34,25 @@ export default function Products() {
     }
   }, [slug])
 
-  return (
-    <motion.div
-      key={loading}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <div className="error-msg">{error?.message}!</div>
+  ) : (
+    <PageWrapper key={loading}>
       <Filterbar sort={sort} panelStatus={panelStatus} setPanel={setPanel} />
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <div className="error-msg">{error?.message}!</div>
-      ) : (
-        <motion.div className="contained">
-          <div className={`${styles.header} header`}>{slug}</div>
-          <div className={styles.settingsWrapper}>
-            <div className={styles.sortFilter} onClick={() => setPanel(true)}>
-              {sortFilter}
-              filter & sort
-            </div>
-            <div className={styles.numShow}>{numProducts} products</div>
+      <motion.div className="contained">
+        <div className={`${styles.header} header`}>{slug}</div>
+        <div className={styles.settingsWrapper}>
+          <div className={styles.sortFilter} onClick={() => setPanel(true)}>
+            {sortFilter}
+            filter & sort
           </div>
-          <ProductCards products={products} />
-          <Paginator />
-        </motion.div>
-      )}
-    </motion.div>
+          <div className={styles.numShow}>{numProducts} products</div>
+        </div>
+        <ProductCards products={products} />
+        <Paginator />
+      </motion.div>
+    </PageWrapper>
   )
 }

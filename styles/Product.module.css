@@ -40,15 +40,18 @@
   padding: 0 10px;
 }
 .productSizes .active,
-.addCart {
+.buyNow {
   background: #000;
   color: #fff;
 }
-.addCart {
+.addCart,
+.buyNow {
   width: 100%;
   padding: 5px 0;
-  text-align: center;
-  text-transform: uppercase;
+}
+.addCart {
+  border: 1px solid #000;
+  margin: 0 0 10px 0;
 }
 .productDesc {
   width: 100%;
@@ -88,6 +91,7 @@
     display: none;
   }
   .selectorWrapperLg {
+    display: flex;
     flex-direction: column;
     width: 14%;
   }

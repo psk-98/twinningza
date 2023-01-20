@@ -1,0 +1,39 @@
+.summaryWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cartItem {
+  margin: 10px 0;
+  padding: 0 0 4px 10px;
+  width: 60%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cartItem div:nth-child(2) {
+  text-transform: uppercase;
+}
+.itemTotalPrice,
+.priceQuantity {
+  font-weight: 500;
+  color: #000 !important;
+}
+.cartItem div {
+  color: rgba(0, 0, 0, 0.7);
+}
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 0 0;
+}
+.payBtn {
+  background: #000;
+  color: #f5f5f5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+}

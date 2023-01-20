@@ -1,12 +1,9 @@
 export const containerVariants = {
   hidden: {
-    x: 300,
-    scale: 0,
+    opacity: 0,
   },
   visible: {
-    scale: 1,
-    x: 0,
-
+    opacity: 1,
     transition: {
       type: "spring",
       staggerChildren: 0.3,

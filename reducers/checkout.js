@@ -2,8 +2,19 @@ import { createSlice } from "@reduxjs/toolkit"
 import { placeOrder } from "../actions/checkout"
 
 export const checkoutSlice = createSlice({
-  name: "products",
+  name: "checkout",
   initialState: {},
+  reducers: {
+    updateAddress: (state, action) => {
+      state.deliveryA = action.payload
+    },
+    updateBilling: (state, action) => {
+      state.billingA = action.payload
+    },
+    updateRedirect: (state, action) => {
+      state.redirect = action.payload
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(placeOrder.pending, (state, action) => {
       state.loading = true
@@ -11,6 +22,7 @@ export const checkoutSlice = createSlice({
     builder.addCase(placeOrder.fulfilled, (state, action) => {
       state.orderSucess = true
       state.loading = false
+      console.log(action)
     })
     builder.addCase(placeOrder.rejected, (state, action) => {
       state.orderSucess = false
@@ -18,3 +30,5 @@ export const checkoutSlice = createSlice({
     })
   },
 })
+
+export const { updateAddress, updateBilling } = checkoutSlice.actions

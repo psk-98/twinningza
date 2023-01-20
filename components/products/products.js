@@ -1,18 +1,38 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "../../styles/Products.module.css"
-import { motion } from "framer-motion"
+import { delay, motion } from "framer-motion"
 
 export default function ProductCards({ products }) {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.3,
+      },
+    },
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 100 },
+    show: { opacity: 1, y: 0 },
+  }
   return (
     <div className={styles.wrapper}>
-      <div className={styles.productCards}>
+      <motion.div
+        className={styles.productCards}
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {products?.map((product) => {
           return (
             <motion.div
               className={styles.productCard}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              variants={item}
+              key={product.id}
             >
               <Link href={`/product/${product.slug}`}>
                 <div className={styles.imgWrapper}>
@@ -21,6 +41,8 @@ export default function ProductCards({ products }) {
                     height={800}
                     src={product.product_images[0].get_image}
                     alt={product.name}
+                    placeholder="blur"
+                    blurDataURL="yoco.webp"
                   />
                 </div>
                 <div className={styles.name}>{product.name}</div>
@@ -30,7 +52,7 @@ export default function ProductCards({ products }) {
             </motion.div>
           )
         })}
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -7,6 +7,9 @@ export const cartSlice = createSlice({
     cart: [],
   },
   reducers: {
+    clearCart: (state, action) => {
+      state.cart = []
+    },
     deleteCartItem: (state, action) => {
       let quantity_ = state.cart[action.payload].quantity
       state.numberCart = state.numberCart - quantity_
@@ -71,5 +74,10 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addToCart, decreaseQuantity, deleteCartItem, increaseQuantity } =
-  cartSlice.actions
+export const {
+  addToCart,
+  decreaseQuantity,
+  deleteCartItem,
+  increaseQuantity,
+  clearCart,
+} = cartSlice.actions

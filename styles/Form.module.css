@@ -1,0 +1,36 @@
+.theForm {
+  text-align: center;
+}
+.inputGroup {
+  margin: 20px 0;
+}
+
+.inputGroup input,
+.inputGroup select {
+  background: none;
+  padding: 0 10px;
+  border: none;
+  width: 70%;
+  border-bottom: 1px solid #000;
+}
+.inputGroup select {
+  width: 75%;
+}
+.inputGroup input:focus,
+.inputGroup select:focus {
+  border-bottom: 2px solid #000;
+  outline: none;
+}
+.inputGroup input::placeholder {
+  text-transform: uppercase;
+}
+.inputGroup p {
+  color: #ff0000;
+  margin: 5px 0 0 0;
+}
+.btnGroup input {
+  margin: 10px 0 0 0;
+  background: #000;
+  padding: 2px 10px;
+  color: #eee;
+}

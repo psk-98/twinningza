@@ -22,8 +22,7 @@ export const selectorVariants = {
     border: "#000 1px solid",
     color: "#000",
     transiton: {
-      ease: "easeIn",
-      duration: 0.5,
+      type: "spring",
     },
   },
   not: {
@@ -31,8 +30,7 @@ export const selectorVariants = {
     border: "none",
     color: "#f5f5f5",
     transiton: {
-      ease: "easeOut",
-      duration: 0.8,
+      type: "spring",
     },
   },
 }

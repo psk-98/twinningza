@@ -1,5 +1,10 @@
 import navStyles from "../../styles/Nav.module.css"
-import { motion, useAnimation, useViewportScroll } from "framer-motion"
+import {
+  AnimatePresence,
+  motion,
+  useAnimation,
+  useViewportScroll,
+} from "framer-motion"
 import {
   line1Variants,
   line2Variants,
@@ -10,6 +15,7 @@ import { useEffect, useState } from "react"
 import { CartIcon, handleBurger, SearchIcon } from "./helpers"
 import Link from "next/link"
 import Search from "./search"
+import SideBar from "./Side"
 
 export default function Nav() {
   const [toggle, setToggle] = useState(false)
@@ -47,77 +53,89 @@ export default function Nav() {
       }
     }
   }, [lastScrollY])
+
+  const handleBurger = () => {
+    setToggle(!toggle)
+    if (!toggle) {
+      line1Controls.start(line1Variants.open)
+      line2Controls.start(line2Variants.open)
+      line3Controls.start(line3Variants.open)
+    } else {
+      line1Controls.start(line1Variants.closed)
+      line2Controls.start(line2Variants.closed)
+      line3Controls.start(line3Variants.closed)
+    }
+  }
+
   const navControls = useAnimation()
   const line1Controls = useAnimation()
   const line2Controls = useAnimation()
   const line3Controls = useAnimation()
 
   return (
-    <>
-      <motion.div
-        className={navStyles.navTop}
-        variants={navVariants}
-        animate={navControls}
-      >
-        {isSearch ? (
-          <Search setIsSearch={setIsSearch} />
-        ) : (
-          <>
+    <motion.div
+      className={navStyles.navTop}
+      variants={navVariants}
+      animate={navControls}
+    >
+      {isSearch ? (
+        <Search setIsSearch={setIsSearch} />
+      ) : (
+        <>
+          <motion.div
+            className={navStyles.burger}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() =>
+              handleBurger(
+                line1Controls,
+                line2Controls,
+                line3Controls,
+                toggle,
+                setToggle,
+              )
+            }
+          >
             <motion.div
-              className={navStyles.burger}
+              className={navStyles.line}
+              variants={line1Variants}
+              animate={line1Controls}
+            ></motion.div>
+            <motion.div
+              className={navStyles.line2}
+              variants={line2Variants}
+              animate={line2Controls}
+            ></motion.div>
+            <motion.div
+              className={navStyles.line3}
+              variants={line3Variants}
+              animate={line3Controls}
+            ></motion.div>
+          </motion.div>
+          <Link href="/">
+            <div className={navStyles.logo}>Twinning ZA</div>
+          </Link>
+          <div className={navStyles.topNavList}>
+            <motion.div
+              className={navStyles.navItem}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                handleBurger(
-                  line1Controls,
-                  line2Controls,
-                  line3Controls,
-                  toggle,
-                  setToggle,
-                )
-              }
+              onClick={() => setIsSearch(!isSearch)}
             >
-              <motion.div
-                className={navStyles.line}
-                variants={line1Variants}
-                animate={line1Controls}
-              ></motion.div>
-              <motion.div
-                className={navStyles.line2}
-                variants={line2Variants}
-                animate={line2Controls}
-              ></motion.div>
-              <motion.div
-                className={navStyles.line3}
-                variants={line3Variants}
-                animate={line3Controls}
-              ></motion.div>
+              <SearchIcon />
             </motion.div>
-            <Link href="/">
-              <div className={navStyles.logo}>Twinning ZA</div>
-            </Link>
-            <div className={navStyles.topNavList}>
+            <Link href="/cart">
               <motion.div
                 className={navStyles.navItem}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsSearch(!isSearch)}
               >
-                <SearchIcon />
+                <CartIcon />
               </motion.div>
-              <Link href="/cart">
-                <motion.div
-                  className={navStyles.navItem}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <CartIcon />
-                </motion.div>
-              </Link>
-            </div>
-          </>
-        )}
-      </motion.div>
-    </>
+            </Link>
+          </div>
+        </>
+      )}
+    </motion.div>
   )
 }
