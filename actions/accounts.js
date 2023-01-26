@@ -3,7 +3,8 @@ import axios from "axios"
 import { BASE_URL, LOAD_USER, LOGIN, LOGOUT, REGISTER } from "./type"
 
 export const tokenConfig = (getState) => {
-  const token = getState().accounts.token
+  //const token = getState().accounts.token
+  const token = localStorage.getItem("token")
 
   const config = {
     headers: {
@@ -12,7 +13,7 @@ export const tokenConfig = (getState) => {
   }
 
   if (token) {
-    config.headers["Authorization"] = `Token ${token}`
+    config.headers["Authorization"] = `${token}`
   }
 
   return config
@@ -23,16 +24,16 @@ export const loadUser = createAsyncThunk(
   async (something, { getState, dispatch, rejectWithValue }) => {
     try {
       const res = await axios.get(
-        `${BASE_URL}/user`,
+        `${BASE_URL}/user/`,
         null,
-        tokenConfig(getState)
+        tokenConfig(getState),
       )
       return { res }
     } catch (err) {
       console.log(err)
       return rejectWithValue(err?.res)
     }
-  }
+  },
 )
 
 export const login = createAsyncThunk(
@@ -48,7 +49,7 @@ export const login = createAsyncThunk(
       console.log(err?.response.data)
       return rejectWithValue(err?.res.data.non_field_errors[0])
     }
-  }
+  },
 )
 
 export const logout = createAsyncThunk(
@@ -58,21 +59,21 @@ export const logout = createAsyncThunk(
       const res = await axios.post(
         `${BASE_URL}/logout/`,
         null,
-        tokenConfig(getState)
+        tokenConfig(getState),
       )
       return { res }
     } catch (err) {
       console.log(err)
       return rejectWithValue(err?.res)
     }
-  }
+  },
 )
 
 export const register = createAsyncThunk(
   REGISTER,
   async (
     { name, surname, email, password },
-    { getState, dispatch, rejectWithValue }
+    { getState, dispatch, rejectWithValue },
   ) => {
     try {
       const body = {
@@ -88,5 +89,36 @@ export const register = createAsyncThunk(
       console.log(err)
       return rejectWithValue(err?.res)
     }
-  }
+  },
+)
+
+export const updateAddress = createAsyncThunk(
+  "ADDRESSES",
+  async (customer_address, { getState, dispatch, rejectWithValue }) => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/address/`,
+
+        tokenConfig(getState),
+        { customer_address },
+      )
+      return { res }
+    } catch (err) {
+      console.log(err)
+      return rejectWithValue(err?.res)
+    }
+  },
+)
+
+export const getOrders = createAsyncThunk(
+  "ORDERS",
+  async (something, { getState, dispatch, rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${BASE_URL}/orders/`)
+      return { res }
+    } catch (err) {
+      console.log(err)
+      return rejectWithValue(err?.res)
+    }
+  },
 )

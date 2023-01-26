@@ -1,19 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap");
-
 * {
   margin: 0;
   padding: 0;
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   text-decoration: none;
-  font-size: 15px;
-  letter-spacing: 0.5px;
+  font-size: 2rem;
   list-style: none;
-  font-weight: 300;
+  font-weight: 400;
   text-transform: capitalize;
 }
 html,
 body {
+  font-size: 8px;
   background: #f5f5f5;
 }
 .next-error-h1,
@@ -25,18 +23,24 @@ img {
   height: auto;
   aspect-ratio: 3/4;
 }
+.checkoutProcess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 50px 0;
+}
 .btn {
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   font-size: 20px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .header {
-  font-weight: 400;
-  letter-spacing: 0.6px;
-  font-size: 20px;
+  font-size: 2.75rem;
 }
 .nav-text {
-  font-size: 12px;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 img {
@@ -44,8 +48,11 @@ img {
   z-index: auto;
   object-fit: cover;
 }
+.light {
+  color: #eee;
+}
 .lighter {
-  color: #7a7a7a;
+  color: #737373;
 }
 ::-webkit-scrollbar {
   width: 10px;
@@ -100,7 +107,7 @@ input[type="number"] {
 }
 @media (min-width: 768px) {
   * {
-    font-size: 20px;
+    font-size: 3rem;
   }
   .header,
   .btn {

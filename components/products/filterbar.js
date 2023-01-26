@@ -6,6 +6,7 @@ import {
   activeVariants,
   appearVariants,
   filterOptionsVariants,
+  filterOptionVariants,
   panelVariants,
 } from "../../animations/filterbar"
 import {
@@ -42,7 +43,7 @@ export default function Filterbar({ sort, panelStatus, setPanel }) {
             height="8"
             fill="none"
             viewBox="0 0 23 8"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setPanel(false)}
           >
@@ -65,22 +66,27 @@ export default function Filterbar({ sort, panelStatus, setPanel }) {
             animate={togglePrice ? "open" : "closed"}
             variants={filterOptionsVariants}
           >
-            <input
-              type="number"
-              name="fromPrice"
-              step="0.01"
-              min="0"
-              placeholder="from"
-              onChange={(e) => dispatch(updatePriceFrom(e.target.value))}
-            />
-            <input
-              type="text"
-              name="toPrice"
-              placeholder="to"
-              step="0.01"
-              min="0"
-              onChange={(e) => dispatch(updatePriceTo(e.target.value))}
-            />
+            <motion.div variants={filterOptionVariants}>
+              <input
+                type="number"
+                name="fromPrice"
+                step="0.01"
+                min="0"
+                placeholder="from"
+                onChange={(e) => dispatch(updatePriceFrom(e.target.value))}
+              />
+            </motion.div>
+            -
+            <motion.div variants={filterOptionVariants}>
+              <input
+                type="text"
+                name="toPrice"
+                placeholder="to"
+                step="0.01"
+                min="0"
+                onChange={(e) => dispatch(updatePriceTo(e.target.value))}
+              />
+            </motion.div>
           </motion.div>
         </div>
         <div className={styles.sortBy}>
@@ -98,7 +104,7 @@ export default function Filterbar({ sort, panelStatus, setPanel }) {
           >
             <motion.div
               className={styles.sortOption}
-              initial={false}
+              initial={{ opacity: 1 }}
               animate={setActive(sort, "price") ? "active" : "not"}
               variants={activeVariants}
               whileHover={{ scale: 1.05 }}

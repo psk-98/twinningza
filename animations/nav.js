@@ -63,43 +63,37 @@ export const navVariants = {
   transparent: {
     backgroundColor: "transparent",
     transition: {
-      ease: "easeOut",
-      duration: 2,
+      type: "spring",
+      stiffness: 400,
     },
   },
   none: {
     backgroundColor: "#f5f5f5",
     transition: {
-      ease: "easeOut",
-      background: {
-        duration: 2,
-      },
+      type: "tween",
+      duration: 0.5,
     },
   },
 }
 export const sidebarVariants = {
   open: {
-    //height: "100vh",
-    width: "100%",
-    //x: 0,
+    left: 0,
     transition: {
       type: "spring",
-      stiffness: 50,
-      restDelta: 2,
-      duration: 5,
-      delayChildren: 0.9,
+      duration: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.4,
     },
-    closed: {
-      //x: "-100vw",
-      //height: 0,
-      width: 0,
-      transition: {
-        delay: 0.5,
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-        delayChildren: 0.2,
-      },
+  },
+  closed: {
+    left: "-100vw",
+    transition: {
+      type: "spring",
+      duration: 0.1,
+      delay: 0.5,
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      when: "afterChildren",
     },
   },
 }
@@ -132,6 +126,9 @@ export const navLinkVariants = {
     transition: {
       y: { stiffness: 1000 },
     },
+  },
+  hover: {
+    scale: 1.05,
   },
 }
 export const navLinkVariantss = {

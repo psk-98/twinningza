@@ -53,19 +53,27 @@
 }
 .sideBar {
   position: fixed;
-  height: 100%;
-  left: 0;
-  width: 0;
+  width: 100vw;
   z-index: 2;
-}
-.sideList {
-  text-align: left;
   height: 92vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  margin: 25px 0;
+  justify-content: space-evenly;
+  padding: 0 0 25px 0;
+}
+.sideItem a {
+  font-size: 22px;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.sideItem {
+  transition: scale 0.3s ease;
+}
+.sideItem:hover {
+  scale: 1.05;
 }
 @media (prefers-color-scheme: dark), (prefers-color-scheme: light) {
   .line,

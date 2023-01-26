@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useScript from "react-script-hook/lib/use-script"
 import { placeOrder } from "../../actions/checkout"
@@ -7,9 +7,18 @@ import styles from "../../styles/Checkout.module.css"
 import { handleTotalPrice } from "../cart/helpers"
 
 export default function Payment() {
+  const [isSuccess, setSuccess] = useState(false)
+  const [token, setToken] = useState()
+
   const state = useSelector((state) => state)
   const { numberCart, cart } = state.cart
+  const { deliveryA } = state.checkout
+
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (isSuccess) dispatch(placeOrder(token))
+  }, [isSuccess, token])
 
   useEffect(() => {
     const script = document.createElement("script")
@@ -24,15 +33,17 @@ export default function Payment() {
       const checkoutButton = document.querySelector("#checkout-button")
       checkoutButton.addEventListener("click", () => {
         yoco.showPopup({
-          amountInCents: 2799,
+          amountInCents: (parseFloat(handleTotalPrice(cart)) * 100).toString(),
           currency: "ZAR",
-          name: "Your Store or Product",
-          description: "Awesome description",
-          callback: (result) => {
+          callback: (result, dispatch, placeOrder) => {
             if (result.error) {
               const errorMessage = result.error.message
               alert(`error occured: ${errorMessage}`)
             } else {
+              //dispatch(placeOrder(result.id))
+              setSuccess(true)
+              setToken(result.id)
+
               alert(`card successfully tokenised: ${result.id}`)
             }
           },
@@ -63,6 +74,11 @@ export default function Payment() {
 
   return (
     <div className="contained">
+      {console.log(isSuccess)}
+      <div className="checkoutProcess">
+        <div className="header">Payment</div>
+        <div className="header">3/3</div>
+      </div>
       <div className={styles.summaryWrapper}>
         {cart.map((product, i) => {
           return (

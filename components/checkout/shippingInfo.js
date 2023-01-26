@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { updateAddress } from "../../reducers/checkout"
 import formStyles from "../../styles/Form.module.css"
+import { placeOrder } from "../../actions/checkout"
+
+//import checkStyles from "../../styles/Checkout.module.css"
 
 export default function Shipping({ setIsShip, setIsPay }) {
   const {
@@ -14,7 +17,7 @@ export default function Shipping({ setIsShip, setIsPay }) {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  handleForm = (data) => {
+  const handleForm = (data) => {
     const {
       email,
       number,
@@ -45,6 +48,10 @@ export default function Shipping({ setIsShip, setIsPay }) {
 
   return (
     <div className="contained">
+      <div className="checkoutProcess">
+        <div className="header">Shipping Info</div>
+        <div className="header">2/3</div>
+      </div>
       <form
         className={formStyles.theForm}
         onSubmit={handleSubmit((data) => handleForm(data))}
@@ -124,17 +131,24 @@ export default function Shipping({ setIsShip, setIsPay }) {
           {errors?.city?.type === "required" && <p>This field is required</p>}
         </div>
         <div className={formStyles.inputGroup}>
-          <input
-            {...register("province", { required: true })}
-            placeholder="Province"
-          />
+          <select {...register("province", { required: true })}>
+            <option value="ZA">Gauteng</option>
+            <option value="ZA">Mpumalanga</option>
+            <option value="ZA">Limpopo</option>
+            <option value="ZA">North West</option>
+            <option value="ZA">Northern Cape</option>
+            <option value="ZA">Eastern Cape</option>
+            <option value="ZA">Kwazulu-Natal</option>
+            <option value="ZA">Western Cape</option>
+            <option value="ZA">Free State</option>
+          </select>
           {errors?.province?.type === "required" && (
             <p>This field is required</p>
           )}
         </div>
         <div className={formStyles.inputGroup}>
           <select {...register("country")}>
-            <option value="ZA">South Africa</option>{" "}
+            <option value="ZA">South Africa</option>
           </select>
         </div>
         <div className={formStyles.btnGroup}>

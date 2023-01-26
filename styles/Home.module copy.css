@@ -1,0 +1,124 @@
+.landing {
+  width: 100%;
+  height: 92vh;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.heroDesc {
+  backdrop-filter: blur(1px);
+  font-weight: 500;
+  margin: 0 0 50px 0;
+  color: #fff;
+}
+.shopBtn {
+  padding: 7px 20px;
+  text-align: center;
+  cursor: pointer;
+  margin: 0 0 20% 0;
+  color: #fff;
+  background: #000;
+}
+.about p {
+  margin: 40px 0 0 0;
+  text-transform: none;
+}
+.productSlider {
+  margin: 70px 0;
+}
+.sliderHeader {
+  margin: 0 25px 30px 25px;
+  display: flex;
+  justify-content: space-between;
+}
+.slider {
+  display: flex;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: 0;
+  padding: 0 0 20px 0;
+}
+.slider::-webkit-scrollbar {
+  height: 5px;
+}
+.slider:hover::-webkit-scrollbar-thumb {
+  background: #000;
+}
+.slider::-webkit-scrollbar-thumb {
+  display: block;
+  height: 2px;
+  background: transparent;
+}
+.sliderCard {
+  min-width: 60%;
+  margin: 0 0 0 20px;
+  text-transform: capitalize;
+  text-align: center;
+}
+.sliderImg,
+.sliderImg img,
+.imgWrapper,
+.imgWrapper img {
+  width: 100%;
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: all ease-in 0.3s;
+}
+.sliderControls {
+  display: flex;
+}
+.sliderControls:first-child {
+  margin: 0 20px 0 0;
+}
+.linkBtn {
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 7px 20px;
+  z-index: auto;
+  pointer-events: none;
+  transition: all ease-in 0.6s;
+}
+@media (pointer: coarse) {
+  .sliderControls {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .sliderCard {
+    min-width: 40%;
+    margin: 0 0 0 40px;
+  }
+  .sliderHeader {
+    margin: 0 40px 30px 40px;
+  }
+}
+@media (min-width: 1024px) {
+  .sliderHeader {
+    margin: 0 70px 30px 70px;
+  }
+  .slider {
+    padding: 0 0 0 70px;
+  }
+  .sliderCard {
+    min-width: 25%;
+    margin: 0 20px 0 0;
+  }
+  .linksWrapper img {
+    aspect-ratio: 3/4;
+  }
+  .linksWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

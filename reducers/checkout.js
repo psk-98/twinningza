@@ -22,7 +22,10 @@ export const checkoutSlice = createSlice({
     builder.addCase(placeOrder.fulfilled, (state, action) => {
       state.orderSucess = true
       state.loading = false
-      console.log(action)
+      state.order_number = action.payload.res.data.ref_code
+      state.being_delivered = action.payload.res.data.being_delivered
+      state.tracking_details = action.payload.res.data.tracking_details
+      console.log(action.payload)
     })
     builder.addCase(placeOrder.rejected, (state, action) => {
       state.orderSucess = false

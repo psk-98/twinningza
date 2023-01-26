@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-import { register } from "../actions/accounts"
+import { register as registerFunc } from "../actions/accounts"
 import { useForm, useWatch } from "react-hook-form"
 import PageWrapper from "../components/layout/PageWrapper"
 import { useDispatch, useSelector } from "react-redux"
@@ -40,10 +40,9 @@ export default function Register() {
       <div className="contained">
         <form
           onSubmit={handleSubmit((data) => {
-            console.log(data)
-
-            //const { email, password, name, surname } = data
-            //dispatch(register({ email, password, name, surname }))
+            //console.log(data)
+            const { email, password, name, surname } = data
+            dispatch(registerFunc({ email, password, name, surname }))
           })}
         >
           <div className={styles.inputGroup}>
@@ -86,6 +85,7 @@ export default function Register() {
             {errors?.email?.type === "pattern" && (
               <p>Enter a valid email address</p>
             )}
+            {accounts?.registerError && <p>{accounts?.registerError}</p>}
           </div>
           <div className={styles.inputGroup}>
             <input

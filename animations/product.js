@@ -3,7 +3,7 @@ export const imgVariants = {
     opacity: 1,
     scale: 1,
     transiton: {
-      ease: "easeIn",
+      type: "spring",
       duration: 0.5,
     },
   },

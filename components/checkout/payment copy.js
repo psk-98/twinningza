@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import useScript from "react-script-hook/lib/use-script"
 import { placeOrder } from "../../actions/checkout"
@@ -8,32 +9,38 @@ import { handleTotalPrice } from "../cart/helpers"
 export default function Payment() {
   const state = useSelector((state) => state)
   const { numberCart, cart } = state.cart
+  const { deliveryA } = state.checkout
+
   const dispatch = useDispatch()
 
-  useScript({
-    src: "https://js.yoco.com/sdk/v1/yoco-sdk-web.js",
-    onload: () => {
-      const yoco = new YocoSDK({
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://js.yoco.com/sdk/v1/yoco-sdk-web.js"
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      const yoco = new window.YocoSDK({
         publicKey: "pk_test_ed3c54a6gOol69qa7f45",
       })
-      var checkoutButton = document.querySelector("#pay-button")
-      checkoutButton.addEventListener("click", function () {
+      const checkoutButton = document.querySelector("#checkout-button")
+      checkoutButton.addEventListener("click", () => {
         yoco.showPopup({
           amountInCents: (parseFloat(handleTotalPrice(cart)) * 100).toString(),
           currency: "ZAR",
-          description: "Awesome description",
-          displayMethod: "MANUAL",
-          callback: function (chargeToken) {
-            console.log(chargeToken)
-            dispatch(placeOrder(chargeToken.id))
-            alert(
-              `Card tokenization completed, your server must now process the payment`,
-            )
+          callback: (result) => {
+            if (result.error) {
+              const errorMessage = result.error.message
+              alert(`error occured: ${errorMessage}`)
+            } else {
+              alert(`card successfully tokenised: ${result.id}`)
+              dispatch(placeOrder(result.id))
+            }
           },
         })
       })
-    },
-  })
+    }
+  }, [])
 
   const handlePriceDetails = (product) => {
     if (product.quantity > 1) {
@@ -57,6 +64,10 @@ export default function Payment() {
 
   return (
     <div className="contained">
+      <div className="checkoutProcess">
+        <div className="header">Payment</div>
+        <div className="header">3/3</div>
+      </div>
       <div className={styles.summaryWrapper}>
         {cart.map((product, i) => {
           return (
@@ -72,7 +83,7 @@ export default function Payment() {
         <div>Total inc tax and delivery</div>
         <div>R {handleTotalPrice(cart).toFixed(2)}</div>
       </div>
-      <div className={`${styles.payBtn} btn`} id="pay-button">
+      <div className={`${styles.payBtn} btn`} id="checkout-button">
         Pay with {yocoLogo}
       </div>
     </div>

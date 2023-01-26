@@ -46,28 +46,34 @@ export default function Product() {
               <span className={styles.priceCurrency}>R</span>
               <span className={styles.price}>{product?.price}</span>
             </div>
-            <Sizes />
-            <div
-              className={`${styles.addCart} btn`}
-              onClick={() => {
-                if (selectedSizes.length > 0)
-                  dispatch(addToCart({ product, size: selectedSizes[0] }))
-              }}
-            >
-              Add to bag
-            </div>
-            <div
-              className={`${styles.buyNow} btn`}
-              onClick={() => {
-                if (selectedSizes.length > 0) {
-                  dispatch(clearCart())
-                  dispatch(addToCart({ product, size: selectedSizes[0] }))
-                  router.push("/checkout")
-                }
-              }}
-            >
-              Buy now
-            </div>
+            {product?.product_stock.length === 0 ? (
+              <div className={`${styles.addCart} btn`}>Sold out</div>
+            ) : (
+              <>
+                <Sizes />
+                <div
+                  className={`${styles.addCart} btn`}
+                  onClick={() => {
+                    if (selectedSizes.length > 0)
+                      dispatch(addToCart({ product, size: selectedSizes }))
+                  }}
+                >
+                  Add to bag
+                </div>
+                <div
+                  className={`${styles.buyNow} btn`}
+                  onClick={() => {
+                    if (selectedSizes.length > 0) {
+                      dispatch(clearCart())
+                      dispatch(addToCart({ product, size: selectedSizes }))
+                      router.push("/checkout")
+                    }
+                  }}
+                >
+                  Buy now
+                </div>
+              </>
+            )}
           </div>
           <Desc selected={selectedDesc} product={product} />
         </div>

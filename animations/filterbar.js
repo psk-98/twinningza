@@ -39,10 +39,13 @@ export const filterOptionsVariants = {
     display: "flex",
     opacity: 1,
     transition: {
-      delay: 0.2,
+      //delay: 0.2,
       type: "spring",
       stiffness: 400,
       damping: 40,
+      duration: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
     },
   },
   closed: {
@@ -53,12 +56,34 @@ export const filterOptionsVariants = {
       type: "spring",
       stiffness: 400,
       damping: 40,
+      //delay: 0.5,
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      when: "afterChildren",
+    },
+  },
+}
+
+export const filterOptionVariants = {
+  open: {
+    opacity: 1,
+    //x: 0,
+    transition: {
+      type: "spring",
+    },
+  },
+  closed: {
+    opacity: 0,
+    //x: -30,
+    transition: {
+      type: "spring",
     },
   },
 }
 
 export const activeVariants = {
   active: {
+    opacity: 1,
     background: "#000",
     color: "#f5f5f5",
     transition: {

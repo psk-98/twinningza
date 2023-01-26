@@ -5,19 +5,17 @@ export const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      type: "spring",
-      staggerChildren: 0.3,
-      duration: 0.8,
-      delay: 0.5,
+      type: "tween",
+      staggerChildren: 0.1,
+      duration: 0.3,
     },
   },
   exit: {
     x: -300,
     opacity: 0,
     transition: {
-      type: "spring",
-      delay: 0.5,
-      duration: 1,
+      type: "tween",
+      duration: 0.3,
     },
   },
 }

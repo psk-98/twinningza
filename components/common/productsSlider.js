@@ -8,7 +8,7 @@ import { backArrow, forwardArrow } from "../../public/svgs"
 import { useInView } from "react-intersection-observer"
 import { useRouter } from "next/router"
 
-export default function Slider({ header, products }) {
+export default function Slider({ header, products, link }) {
   const router = useRouter()
   const [isEmpty, setEmpty] = useState(true)
   const [ref, inView] = useInView({ threshold: 0.9 })
@@ -37,8 +37,8 @@ export default function Slider({ header, products }) {
     >
       <div className={`${styles.sliderHeader} `}>
         <p className="header">{header}</p>
-        <div className={styles.sliderControls}>
-          {backArrow}
+        <div className={styles.sliderViewAll} onClick={() => router.push(link)}>
+          view all
           {forwardArrow}
         </div>
       </div>
@@ -49,7 +49,14 @@ export default function Slider({ header, products }) {
               className={styles.sliderCard}
               key={product.id}
               initial={{ opacity: 0, y: -100 }}
-              whileHover="hover"
+              whileHover={{
+                opacity: 0.85,
+                scale: 1.1,
+                transition: {
+                  ease: "easeInOut",
+                  duration: 0.3,
+                },
+              }}
               animate={{
                 opacity: 1,
                 y: 0,
@@ -67,12 +74,15 @@ export default function Slider({ header, products }) {
                   alt={product.name}
                 />
               </div>
-              <div className={styles.sliderName}>{product.name}</div>
-              <Link href={`/products/${product.category}`}>
-                <div className={`nav-text lighter`}>{product.category}</div>
-              </Link>
-              <div className={`nav-text`}>
-                R {Math.round(product.price * 100) / 100}
+              <div className={styles.productName}>{product.name}</div>
+              <div
+                className={`nav-text lighter`}
+                onClick={() => router.push(`/products/${product.category}`)}
+              >
+                {product.category}
+              </div>
+              <div className={styles.productPrice}>
+                R{Math.round(product.price * 100) / 100}
               </div>
             </motion.div>
           )

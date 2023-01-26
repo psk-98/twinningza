@@ -1,3 +1,8 @@
+.addressInfo {
+  margin: 0 0 40px 0;
+  padding: 0 0 4px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
 .summaryWrapper {
   width: 100%;
   display: flex;
@@ -8,7 +13,7 @@
 .cartItem {
   margin: 10px 0;
   padding: 0 0 4px 10px;
-  width: 60%;
+  width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 

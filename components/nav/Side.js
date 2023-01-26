@@ -6,110 +6,46 @@ import {
   ulVariants,
 } from "../../animations/nav"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
-export default function SideBar({ toggle, handleBurger }) {
-  const router = useRouter()
-
+export default function SideBar({ toggle, sideBarControls }) {
   return (
     <motion.div
-      initial={false}
       className={styles.sideBar}
-      animate={toggle ? "open" : "closed"}
       variants={sidebarVariants}
+      initial={false}
+      animate={toggle ? "open" : "closed"}
     >
-      <motion.ul className={styles.sideList} variants={ulVariants}>
-        <motion.li
-          className={styles.sideItem}
-          key={1}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/products/women")
-          }}
-        >
-          Women
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={2}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/products/kids")
-          }}
-        >
-          Kids
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={3}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/products/men")
-          }}
-        >
-          men
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={4}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/products/men")
-          }}
-        >
-          about us
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={5}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/products/men")
-          }}
-        >
-          contact us
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={6}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/login")
-          }}
-        >
-          login
-        </motion.li>
-        <motion.li
-          className={styles.sideItem}
-          key={7}
-          variants={navLinkVariants}
-          //whileHover="hover"
-          //whileTap="tap"
-          onClick={() => {
-            handleBurger()
-            router.push("/register")
-          }}
-        >
-          register
-        </motion.li>
-      </motion.ul>
+      {navItems.map((item, index) => {
+        return (
+          <motion.div
+            className={styles.sideItem}
+            key={index}
+            variants={navLinkVariants}
+          >
+            <Link href={item.link}>{item.name}</Link>
+          </motion.div>
+        )
+      })}
     </motion.div>
   )
 }
+
+const navItems = [
+  {
+    name: "Shop Women",
+    link: "/products/women",
+  },
+  {
+    name: "Shop Kids",
+    link: "/products/kids",
+  },
+  {
+    name: "Shop Men",
+    link: "/products/men",
+  },
+  {
+    name: "Contact Us",
+    link: "/contact",
+  },
+]

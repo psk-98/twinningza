@@ -10,12 +10,14 @@ import {
   line2Variants,
   line3Variants,
   navVariants,
+  sidebarVariants,
 } from "../../animations/nav"
 import { useEffect, useState } from "react"
 import { CartIcon, handleBurger, SearchIcon } from "./helpers"
 import Link from "next/link"
 import Search from "./search"
 import SideBar from "./Side"
+import NavTop from "./Top"
 
 export default function Nav() {
   const [toggle, setToggle] = useState(false)
@@ -31,11 +33,9 @@ export default function Nav() {
       if (window.scrollY > lastScrollY) {
         // if scroll down hide the navbar
         setShow(false)
-        navControls.start(navVariants.transparent)
       } else {
         // if scroll up show the navbar
         setShow(true)
-        navControls.start(navVariants.none)
       }
 
       // remember current page location to use in the next move
@@ -46,7 +46,6 @@ export default function Nav() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", controlNavbar)
-
       // cleanup function
       return () => {
         window.removeEventListener("scroll", controlNavbar)
@@ -54,88 +53,16 @@ export default function Nav() {
     }
   }, [lastScrollY])
 
-  const handleBurger = () => {
-    setToggle(!toggle)
-    if (!toggle) {
-      line1Controls.start(line1Variants.open)
-      line2Controls.start(line2Variants.open)
-      line3Controls.start(line3Variants.open)
-    } else {
-      line1Controls.start(line1Variants.closed)
-      line2Controls.start(line2Variants.closed)
-      line3Controls.start(line3Variants.closed)
-    }
-  }
-
-  const navControls = useAnimation()
-  const line1Controls = useAnimation()
-  const line2Controls = useAnimation()
-  const line3Controls = useAnimation()
-
   return (
-    <motion.div
-      className={navStyles.navTop}
-      variants={navVariants}
-      animate={navControls}
-    >
-      {isSearch ? (
-        <Search setIsSearch={setIsSearch} />
-      ) : (
-        <>
-          <motion.div
-            className={navStyles.burger}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() =>
-              handleBurger(
-                line1Controls,
-                line2Controls,
-                line3Controls,
-                toggle,
-                setToggle,
-              )
-            }
-          >
-            <motion.div
-              className={navStyles.line}
-              variants={line1Variants}
-              animate={line1Controls}
-            ></motion.div>
-            <motion.div
-              className={navStyles.line2}
-              variants={line2Variants}
-              animate={line2Controls}
-            ></motion.div>
-            <motion.div
-              className={navStyles.line3}
-              variants={line3Variants}
-              animate={line3Controls}
-            ></motion.div>
-          </motion.div>
-          <Link href="/">
-            <div className={navStyles.logo}>Twinning ZA</div>
-          </Link>
-          <div className={navStyles.topNavList}>
-            <motion.div
-              className={navStyles.navItem}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsSearch(!isSearch)}
-            >
-              <SearchIcon />
-            </motion.div>
-            <Link href="/cart">
-              <motion.div
-                className={navStyles.navItem}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <CartIcon />
-              </motion.div>
-            </Link>
-          </div>
-        </>
-      )}
-    </motion.div>
+    <>
+      <NavTop
+        show={show}
+        toggle={toggle}
+        setToggle={setToggle}
+        isSearch={isSearch}
+        setIsSearch={setIsSearch}
+      />
+      <SideBar toggle={toggle} />
+    </>
   )
 }

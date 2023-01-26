@@ -40,6 +40,7 @@ export default function Products() {
     <div className="error-msg">{error?.message}!</div>
   ) : (
     <PageWrapper key={loading}>
+      {console.log(router)}
       <Filterbar sort={sort} panelStatus={panelStatus} setPanel={setPanel} />
       <motion.div className="contained">
         <div className={`${styles.header} header`}>{slug}</div>

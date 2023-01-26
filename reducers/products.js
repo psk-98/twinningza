@@ -5,7 +5,7 @@ export const productsSlice = createSlice({
   name: "products",
   initialState: {
     panelStatus: false,
-    loading: true,
+    loading: false,
     selectedDesc: "desc",
     selectedSizes: [],
   },
@@ -24,12 +24,7 @@ export const productsSlice = createSlice({
       state.search = action.payload
     },
     updateSizes: (state, action) => {
-      if (state.selectedSizes.includes(action?.payload)) {
-        //remove element if already in array
-        state.selectedSizes = state.selectedSizes.filter(
-          (element) => element !== action?.payload,
-        )
-      } else state.selectedSizes.push(action?.payload)
+      state.selectedSizes = action.payload
     },
     updatePanel: (state) => {
       state.panelStatus = !state.panelStatus

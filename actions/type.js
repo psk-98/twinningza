@@ -9,4 +9,4 @@ export const LOAD_USER = "LOAD_USER"
 //
 export const BASE_URL = "https://psk98.pythonanywhere.com/api"
 
-export const BASE_URLs = " http://127.0.0.1:8000/api"
+export const BASE_URLd = " http://127.0.0.1:8000/api"

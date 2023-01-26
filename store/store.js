@@ -4,8 +4,14 @@ import rootReducer from "../reducers/rootReducer"
 
 const masterReducer = (state, action) => {
   if (action.type === HYDRATE) {
+    console.log(state)
+    console.log(action)
     const nextState = {
       ...state,
+      products: {
+        products: action.payload.products.products,
+        ...action.payload.products,
+      },
     }
     return nextState
   } else {

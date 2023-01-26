@@ -1,5 +1,51 @@
 import { motion } from "framer-motion"
 import { svgVariants, pathVariants } from "../animations/common"
+
+export function SearchIcon() {
+  return (
+    <motion.svg
+      xmlns="http://www.w3.org/2000/svg"
+      variants={svgVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      width="17"
+      height="17"
+      fill="none"
+      viewBox="0 0 17 17"
+    >
+      <motion.path
+        variants={pathVariants}
+        stroke="#000"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M16 16l-2.98-3.153a6.992 6.992 0 10-11.732-6.84 6.992 6.992 0 008.864 8.633"
+      ></motion.path>
+    </motion.svg>
+  )
+}
+export function CartIcon() {
+  return (
+    <motion.svg
+      xmlns="http://www.w3.org/2000/svg"
+      variants={svgVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      width="14"
+      height="17"
+      fill="none"
+      viewBox="0 0 14 17"
+    >
+      <motion.path
+        variants={pathVariants}
+        stroke="#000"
+        d="M11 16H1V3.679h12v10.178M4.5 3.143V2.07v0C4.5 1.48 4.98 1 5.571 1H8v0a1 1 0 011 1v1.143"
+      ></motion.path>
+    </motion.svg>
+  )
+}
+
 export const backArrow = (
   <svg
     width={23}

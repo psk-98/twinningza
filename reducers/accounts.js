@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { login } from "../actions/accounts"
+import { loadUser, login, register } from "../actions/accounts"
 
 export const accountsSlice = createSlice({
   name: "accounts",
   initialState: {
-    //token: localStorage.getItem("token"),
-    //isAuthenticated: false,
+    isAuthenticated: false,
   },
   reducers: {
     updateUser: (state, action) => {
@@ -22,12 +21,41 @@ export const accountsSlice = createSlice({
       state.loading = false
       state.user = action.payload.res.data.user
       state.isAuthenticated = true
+      localStorage.setItem("token", action.payload.res.data.token)
+      state.token = localStorage.getItem("token")
     })
-    buidler.addCase(login.rejected, (state, action) => {
+    buidler.addCase(loadUser.rejected, (state, action) => {
       state.loading = false
       state.isAuthenticated = false
       state.user = null
-      state.error = "Invalid creditionals"
+    })
+    buidler.addCase(loadUser.pending, (state, action) => {
+      state.loading = true
+    })
+    buidler.addCase(loadUser.fulfilled, (state, action) => {
+      console.log(action)
+      state.loading = false
+      state.user = action.payload.res.data.user
+      state.isAuthenticated = true
+      localStorage.setItem("token", action.payload.res.data.token)
+      state.token = localStorage.getItem("token")
+    })
+    buidler.addCase(register.pending, (state, action) => {
+      state.loading = true
+    })
+    buidler.addCase(register.fulfilled, (state, action) => {
+      console.log(action)
+      state.loading = false
+      state.user = action.payload.res.data.user
+      state.isAuthenticated = true
+      localStorage.setItem("token", action.payload.res.data.token)
+      state.token = localStorage.getItem("token")
+    })
+    buidler.addCase(register.rejected, (state, action) => {
+      state.loading = false
+      state.isAuthenticated = false
+      state.user = null
+      state.registerError = "Email already exists"
     })
   },
 })
