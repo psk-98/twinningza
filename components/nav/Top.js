@@ -62,7 +62,6 @@ export default function NavTop({
           </div>
 
           <div className={styles.topNavList}>
-            <Link href="/profile">P</Link>
             <motion.div
               className={styles.navItem}
               whileHover={{ scale: 1.1 }}
