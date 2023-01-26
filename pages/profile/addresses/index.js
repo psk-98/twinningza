@@ -20,20 +20,20 @@ export default function Addresses() {
     formState: { errors },
   } = useForm()
 
-  useEffect(() => {
-    if (isEdit) {
-      const {} = useForm({
-        defaultValues: {
-          name,
-          address,
-          postal,
-          city,
-          province,
-          country,
-        },
-      })
-    }
-  }, [isEdit])
+  // useEffect(() => {
+  //   if (isEdit) {
+  //     const {} = useForm({
+  //       defaultValues: {
+  //         name,
+  //         address,
+  //         postal,
+  //         city,
+  //         province,
+  //         country,
+  //       },
+  //     })
+  //   }
+  // }, [isEdit])
 
   //const { addresses } = state.accounts?.user
 
